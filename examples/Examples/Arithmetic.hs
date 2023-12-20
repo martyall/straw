@@ -1,5 +1,4 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE PackageImports #-}
 {-# LANGUAGE RebindableSyntax #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 
@@ -7,10 +6,9 @@ module Examples.Arithmetic (simpleBool, simpleArith) where
 
 import qualified Categorifier.Categorify as Categorify
 import Categorifier.Vec.Client ()
-import Straw
-import TExpr (Ty (TField))
-import "snarkl" SyntaxMonad (pair, (>>=))
-import qualified "snarkl" SyntaxMonad as Snarkl
+import Snarkl.Language (Ty (..), pair, (>>=))
+import qualified Snarkl.Language.SyntaxMonad as Snarkl
+import Straw (Straw (runStraw))
 import Prelude (Bool (..), Rational, fromInteger, (&&), (*), (+), (-), (==))
 
 -- we need the because we enabled rebindable syntax

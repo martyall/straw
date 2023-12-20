@@ -18,10 +18,9 @@ import Categorifier.Vec.Client ()
 import Data.Bool (bool)
 import Data.Either (fromLeft)
 import Data.Vec.Lazy (Vec (..))
+import qualified Snarkl.Language.SyntaxMonad as Snarkl
 import Straw
-import "snarkl" Syntax (fromRational)
-import "snarkl" SyntaxMonad ((>>=))
-import qualified "snarkl" SyntaxMonad as Snarkl
+import "snarkl" Snarkl.Language (fromRational, (>>=))
 import Prelude (Bool (..), Either (..), Rational, fromInteger, sum, ($), (*), (+), (.))
 
 -- * Basic

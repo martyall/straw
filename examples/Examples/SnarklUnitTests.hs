@@ -1,6 +1,5 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE GADTs #-}
-{-# LANGUAGE PackageImports #-}
 {-# LANGUAGE RebindableSyntax #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 
@@ -8,10 +7,9 @@ module Examples.SnarklUnitTests where
 
 import qualified Categorifier.Categorify as Categorify
 import Categorifier.Vec.Client ()
+import Snarkl.Language (Ty (TField), pair, (>>=))
+import qualified Snarkl.Language.SyntaxMonad as Snarkl
 import Straw
-import TExpr (Ty (TField))
-import "snarkl" SyntaxMonad (pair, (>>=))
-import qualified "snarkl" SyntaxMonad as Snarkl
 import Prelude (Bool (..), Rational, fromInteger, (&&), (*), (+), (-))
 
 -- we need the because we enabled rebindable syntax

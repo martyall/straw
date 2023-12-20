@@ -11,9 +11,7 @@ module Examples.Snarkl
   )
 where
 
-import "snarkl" Syntax
-import "snarkl" SyntaxMonad (Comp, return, (>>), (>>=))
-import "snarkl" TExpr
+import Snarkl.Language (Comp, TExp, Ty (..), arr, forall, fromRational, get, return, set, (+), (>>), (>>=))
 import Prelude (Rational, fromInteger, ($))
 
 arr_ex :: TExp 'TField Rational -> Comp 'TField

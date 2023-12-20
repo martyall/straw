@@ -32,8 +32,8 @@ source-repository-package
  type: git
  location: https://github.com/martyall/snarkl.git
  -- lambdas branch
- tag: 234b5f1752901ccb0ad1c039b5f9e8f52369a0ac
- --sha256: xjplr5MT+i0zeV85i7ymWBigf/6jIFtQ/sBZUzSQt0c=
+ tag: 78eedc4b6777f10489cc54b77bba137ca3e7b40b
+ --sha256: XvlFyP5MUABiMV/EW8jzG49FfcxZxfeKVD/ZvNLEw5E=
 
 constraints:
     PyF >=0.9.0 && <0.10

@@ -36,11 +36,8 @@ import Data.Type.Nat (Nat (..))
 import qualified Data.Type.Nat as Nat
 import Data.Typeable (Typeable)
 import Data.Vec.Lazy (Vec (..))
-import "snarkl" Syntax (fromRational)
-import qualified "snarkl" Syntax as Snarkl
-import "snarkl" SyntaxMonad (return, (>>), (>>=))
-import qualified "snarkl" SyntaxMonad as Snarkl
-import qualified "snarkl" TExpr as Snarkl
+import Snarkl.Language (fromRational, return, (>>), (>>=))
+import qualified Snarkl.Language as Snarkl
 import Prelude (Bool, Either, Integer, Rational, error, fromInteger, ($), (+), (.))
 
 data Straw a b = Straw

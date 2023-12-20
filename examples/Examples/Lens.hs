@@ -11,10 +11,9 @@ import qualified Categorifier.Categorify as Categorify
 import Categorifier.Client
 import Control.Lens
 import Data.Vec.Lazy (Vec (..))
+import Snarkl.Language (Ty (TField), pair, (>>=))
+import qualified Snarkl.Language.SyntaxMonad as Snarkl
 import Straw
-import TExpr (Ty (TField))
-import "snarkl" SyntaxMonad (pair, (>>=))
-import qualified "snarkl" SyntaxMonad as Snarkl
 import Prelude (Rational, foldl, fromInteger)
 
 data Point = Point {_x :: Rational, _y :: Rational}

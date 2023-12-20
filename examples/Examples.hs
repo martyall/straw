@@ -9,8 +9,8 @@ import GHC.IO.Encoding (setLocaleEncoding, utf8)
 import Hedgehog ((===))
 import qualified Hedgehog
 import qualified Hedgehog.Main as Hedgehog
-import qualified "snarkl" Compile as Snarkl
-import qualified "snarkl" Toplevel as Snarkl
+import qualified Snarkl.Compile as Snarkl
+import qualified Snarkl.Toplevel as Snarkl
 
 -- | Little helper to get our expressions into a form that Hedgehog can compare.
 comparable :: (Typeable ty) => Snarkl.Comp ty -> String
