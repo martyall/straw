@@ -17,7 +17,5 @@ jobs:
           pattern: |
             src/**/*.hs
             examples/**/*.hs
-            tests/**/*.hs
-            benchmarks/**/*.hs
           version: 0.5.2.0
 
