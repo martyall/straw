@@ -15,4 +15,4 @@ jobs:
         name: martyall
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
     - run: nix build
-    - run: ./result/bin/examples
+    - run: nix develop --command cabal run tests
