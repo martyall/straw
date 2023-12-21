@@ -74,8 +74,7 @@ test-suite examples
 
   default-language: Haskell2010
   ghc-options:
-    -O2 -fplugin Categorifier -fplugin-opt Categorifier:defer-failures
-    -fplugin-opt
+    -O2 -fplugin Categorifier -fplugin-opt
     Categorifier:hierarchy:Categorifier.Hierarchy.ConCat.classHierarchy
     -fplugin-opt
     Categorifier:lookup:Categorifier.Core.MakerMap.baseSymbolLookup

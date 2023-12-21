@@ -39,10 +39,10 @@ prop_simple_lens =
   Hedgehog.property $
     interpretable Lens.simpleLens [1, 2] === 42
 
-prop_complicated_lens :: Hedgehog.Property
-prop_complicated_lens =
+prop_complicate_lens :: Hedgehog.Property
+prop_complicate_lens =
   Hedgehog.property $
-    interpretable Lens.simpleLens [1, 2, 32] === 42
+    interpretable Lens.complicatedLens [32, 1, 2, 0] === 42
 
 main :: IO ()
 main = do

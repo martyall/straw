@@ -10,11 +10,10 @@ module Examples.Lens where
 import qualified Categorifier.Categorify as Categorify
 import Categorifier.Client
 import Control.Lens
-import Data.Vec.Lazy (Vec (..))
 import Snarkl.Language (Ty (TField), pair, (>>=))
 import qualified Snarkl.Language.SyntaxMonad as Snarkl
 import Straw
-import Prelude (Rational, foldl, fromInteger)
+import Prelude (Foldable (foldMap, foldl), Rational, fromInteger, mempty, (<>))
 
 data Point = Point {_x :: Rational, _y :: Rational}
 
@@ -30,17 +29,29 @@ type instance SnarklTy Atom = SnarklTy (Rep Atom)
 $(deriveHasRep ''Atom)
 $(makeLenses ''Atom)
 
+data ConsList a = Nil | Cons a (ConsList a)
+
+$(deriveHasRep ''ConsList)
+
+instance Foldable ConsList where
+  foldl _ z Nil = z
+  foldl f z (Cons x xs) = foldl f (f z x) xs
+  {-# INLINEABLE foldl #-}
+
+  foldMap _ Nil = mempty
+  foldMap f (Cons x xs) = f x <> foldMap f xs
+  {-# INLINEABLE foldMap #-}
+
 simpleLens :: Snarkl.Comp 'TField
 simpleLens =
-  let prog :: (Rational, Rational) -> Rational
-      prog (x, y) =
-        let p = Point x y
-            atom = Atom 32 p 1
+  let prog :: Point -> Rational
+      prog p =
+        let atom = Atom 32 p 2
             f :: Atom -> Rational -> Atom
             f a n = a & elem +~ n
          in f atom 10 ^. elem
 
-      compiledProg :: Straw (Rational, Rational) Rational
+      compiledProg :: Straw Point Rational
       compiledProg = Categorify.expression prog
    in do
         x <- Snarkl.fresh_input
@@ -50,21 +61,20 @@ simpleLens =
 
 complicatedLens :: Snarkl.Comp 'TField
 complicatedLens =
-  let prog :: (Rational, (Rational, Rational)) -> Rational
-      prog (x, (y, z)) =
-        let p = Point x y
-            atom :: Atom
-            atom = Atom z p 1
-            f :: Atom -> Rational -> Atom
+  let prog :: Atom -> Rational
+      prog atom =
+        let f :: Atom -> Rational -> Atom
             f a n = a & elem +~ n
-            ls = 1 ::: 2 ::: 3 ::: VNil
+            ls = Cons 1 (Cons 2 (Cons 3 (Cons 4 Nil)))
          in foldl f atom ls ^. elem
-      compiledProg :: Straw (Rational, (Rational, Rational)) Rational
+      compiledProg :: Straw Atom Rational
       compiledProg = Categorify.expression prog
    in do
         x <- Snarkl.fresh_input
         y <- Snarkl.fresh_input
         z <- Snarkl.fresh_input
-        yz <- pair y z
-        p <- pair x yz
+        w <- Snarkl.fresh_input
+        pyz <- pair y z
+        pxyw <- pair pyz w
+        p <- pair x pxyw
         runStraw compiledProg p
