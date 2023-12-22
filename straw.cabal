@@ -56,6 +56,7 @@ test-suite examples
     Examples.Snarkl
     Examples.SnarklUnitTests
     Examples.Straw
+    Examples.Sudoku
 
   build-depends:
     , base
@@ -65,6 +66,8 @@ test-suite examples
     , categorifier-plugin
     , categorifier-vec-integration
     , concat-classes
+    , distributive
+    , fin
     , ghc-prim
     , hedgehog
     , lens
@@ -74,8 +77,7 @@ test-suite examples
 
   default-language: Haskell2010
   ghc-options:
-    -O2 -fplugin Categorifier -fplugin-opt Categorifier:defer-failures
-    -fplugin-opt
+    -O2 -fplugin Categorifier -fplugin-opt
     Categorifier:hierarchy:Categorifier.Hierarchy.ConCat.classHierarchy
     -fplugin-opt
     Categorifier:lookup:Categorifier.Core.MakerMap.baseSymbolLookup
@@ -86,7 +88,7 @@ test-suite examples
     -fplugin-opt
     Categorifier:maker-map:Categorifier.Vec.Integration.makerMapFun
     -fno-enable-rewrite-rules -fno-ignore-interface-pragmas
-    -fexpose-all-unfoldings -fwarn-unused-imports -Werror
+    -fexpose-all-unfoldings -Werror
 
 -- No idea what this is doing but some things (e.g. complicatedLens) don't compile without it
 -- need -fno-enable-rewrite-rules to avoid `(# ... #)`

@@ -1,10 +1,12 @@
 {-# LANGUAGE PackageImports #-}
 {-# LANGUAGE TemplateHaskell #-}
 
+import Data.Fin (fin0, fin4, fin5)
 import Data.Typeable (Typeable)
 import qualified Examples.Arithmetic as Arithmetic
 import qualified Examples.Lens as Lens
 import qualified Examples.SnarklUnitTests as SnarklUnitTests
+import Examples.Sudoku
 import GHC.IO.Encoding (setLocaleEncoding, utf8)
 import Hedgehog ((===))
 import qualified Hedgehog
@@ -39,10 +41,15 @@ prop_simple_lens =
   Hedgehog.property $
     interpretable Lens.simpleLens [1, 2] === 42
 
-prop_complicated_lens :: Hedgehog.Property
-prop_complicated_lens =
+prop_validate_sudoku :: Hedgehog.Property
+prop_validate_sudoku =
   Hedgehog.property $
-    interpretable Lens.simpleLens [1, 2, 32] === 42
+    interpretable (concat validPuzzule) === True
+
+prop_invalidate_sudoku :: Hedgehog.Property
+prop_invalidate_sudoku =
+  Hedgehog.property $
+    interpretable sudoku (concat invalidSudokuPuzzle) === 0
 
 main :: IO ()
 main = do

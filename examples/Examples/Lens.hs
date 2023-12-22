@@ -48,6 +48,7 @@ simpleLens =
         p <- pair x y
         runStraw compiledProg p
 
+{-
 complicatedLens :: Snarkl.Comp 'TField
 complicatedLens =
   let prog :: (Rational, (Rational, Rational)) -> Rational
@@ -68,3 +69,4 @@ complicatedLens =
         yz <- pair y z
         p <- pair x yz
         runStraw compiledProg p
+-}
